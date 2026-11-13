@@ -5,7 +5,11 @@ export default function Assistant({ state, dispatch, onClose }) {
   const [msgs, setMsgs] = useState([{ from: 'bot', text: 'Привет! Я помощник по спринту. Спроси, что блокирует работу, или попроси создать задачу.' }])
   const [input, setInput] = useState('')
   const end = useRef(null)
-  useEffect(() => end.current?.scrollIntoView({ behavior: 'smooth' }), [msgs])
+  // Фигурные скобки обязательны: в новых браузерах scrollIntoView возвращает
+  // Promise, и React принял бы его за функцию очистки эффекта.
+  useEffect(() => {
+    end.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [msgs])
 
   const send = (text) => {
     if (!text.trim()) return

@@ -30,7 +30,9 @@ export default function App() {
   const [assistant, setAssistant] = useState(false)
   const [bell, setBell] = useState(false)
 
-  useEffect(() => save(state), [state])
+  useEffect(() => {
+    save(state)
+  }, [state])
 
   useEffect(() => {
     dispatch({ type: 'track', event: 'session_start' })
